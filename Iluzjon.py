@@ -23,7 +23,6 @@ class Iluzjon(CinemaScraper):
 
 
     def get_shows_list(self, lista):
-
         def __get_year(info):
             try:
                 int(info[-1])
