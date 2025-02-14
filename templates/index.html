@@ -2,26 +2,32 @@
 {% block title %}Results{% endblock %}
 {% block content %}
 <div class="row-gap-sm-3" id="title">
-    <h5 class="display-6">Movie recommendations in Warsaw</h5>
-    <hr>
+    <h1 class="h1-title">Warsaw movie <br>recommendations</h1>
+    <!-- <h5 class="display-6">movie recommendations</h5><hr>
+    <h5 class="display-6">in Warsaw</h5> -->
+    
 </div>
 {% if post|length == 0: %}
     <h4>There are no movies.</h4><h4> Try another day.</h4>
 {% else: %}
     <table id='' class="center">
         <thead>
-        <th scope="col">Title</th>
+        <th scope="col">TODAY</th>  <!-- POWINNO ZMIENIAĆ SIĘ DYNAMICZNIE-->
+        <th scope="col"></th>
+        <th scope="col"></th>
+        <th scope="col">DATE</th>   <!-- POWINNO ZMIENIAĆ SIĘ DYNAMICZNIE-->
+        <!-- <th scope="col">Title</th>
         <th scope="col">Rating</th>
         <th scope="col">Time & Place</th>
-        <th scope="col">Cinema</th>
+        <th scope="col">Cinema</th> -->
         </thead>
         <tbody>
             {% for i in post: %}
                 <tr>
-                <th scope="row"><a href={{i['link']}}>{{ i['title'] }}</a></th>
-                <th> {{ i['rating'] }}</th>
+                <th scope="row"><!--<a href={{i['link']}}> -->{{ i['title'] }}<!--</a>--></th>
+                <th><img src="/static/rating-icon.png"> {{ i['rating'] }}</th>
                 <th> {{ i['time'] }}</th>
-                <th> {{ i['cinema'] }}</th>
+                <th><img src="/static/iluzjon-logo.png"> {{ i['cinema'] }}</th> <!-- zmienić ['cinema'] żeby wyświetlało w zależności od kina odpowiednie logo -->
                 </tr>
             {% endfor %}
         </tbody>
