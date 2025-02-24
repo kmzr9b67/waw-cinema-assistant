@@ -1,18 +1,22 @@
+import requests
+
+from bs4 import BeautifulSoup
 from concurrent.futures import ThreadPoolExecutor
 
 from cinema_scraper import CinemaScraper
 from movie import Movie
 
-class Iluzjon(CinemaScraper):
+class Iluzjon():
     list_shows = []
     number = 0
 
     def __init__(self):
         self.base_url = 'https://www.iluzjon.fn.org.pl/repertuar.html'
-        super().__init__(self.base_url)
         Iluzjon.number += 1
         self.cinema = 'Iluzjion'
         self.number = Iluzjon.number
+        self.request = requests.get(self.base_url).text
+        self.html = BeautifulSoup(self.request, 'html.parser')
         
 
     def __get_result(self, schedule:str, movie_title:str, realise_year:str) -> dict:

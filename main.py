@@ -11,7 +11,7 @@ DAY_AFTER_TOMORROW = (datetime.now().date() + timedelta(2)).strftime('%a, %d.%m'
 DAYS = {
     'Today': datetime.now().date(),
     'Tomorrow': datetime.now().date() + timedelta(1),
-    'Tomorrow':  datetime.now().date() + timedelta(2)
+    'Day After Tomorrow':  datetime.now().date() + timedelta(2)
 }
 
 
@@ -19,17 +19,18 @@ app = Flask(__name__)
 
 def get_amondo_data(number: str) -> None:
     cinema = Amondo()
+    print(cinema)
     cinema.retrive_movie_info(number) 
 
 def get_iluzjon_data(day_number: int) -> None:
     cinema = Iluzjon()
-    headings = cinema.html_parser().find_all('h3')
+    headings = cinema.html.find_all('h3')
     try:
         counter = [int(i.text[0:2]) for i in headings].index(day_number)
     except ValueError:
         return []
-
-    show_table = cinema.find_elements_by_tag('table')[counter]
+    
+    show_table = cinema.html.find_all('table')[counter]
     show_table_hour = show_table.find_all(class_='hour')
     time_and_title = [i.text.split(' - ', 1) for i in show_table_hour]
     list_times = [i[0] for i in time_and_title]
@@ -52,7 +53,7 @@ def get_info():
     with ThreadPoolExecutor(max_workers=2) as executor:
         executor.submit(get_amondo_data, date)
         executor.submit(get_iluzjon_data, int(date.day))
-
+    
     repertuar = CinemaScraper.result
     repertuar.sort(key = lambda x: str(x['rating']), reverse = True)
     
