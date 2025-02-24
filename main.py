@@ -42,7 +42,7 @@ def get_iluzjon_data(day_number: int) -> None:
 
 @app.route('/', methods=['GET', 'POST'])
 def home():
-    return render_template('home.html', day_after_tomorrow = DAY_AFTER_TOMORROW)
+    return render_template('help.html', day_after_tomorrow = DAY_AFTER_TOMORROW)
 
 @app.route('/result', methods=['GET', 'POST'])
 def get_info():
@@ -59,7 +59,7 @@ def get_info():
     
     if day_get not in ['Today', 'Tomorrow']:
         day_get = DAY_AFTER_TOMORROW
-    return render_template('day_schedule.html', post=repertuar, 
+    return render_template('index.html', post=repertuar, 
                         what_day = day_get, what_date = date)
 
 if __name__ == '__main__':
