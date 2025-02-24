@@ -11,8 +11,7 @@ DAY_AFTER_TOMORROW = (datetime.now().date() + timedelta(2)).strftime('%a, %d.%m'
 DAYS = {
     'Today': datetime.now().date(),
     'Tomorrow': datetime.now().date() + timedelta(1),
-    (datetime.now().date() + timedelta(2)).strftime('%a,'): 
-                                                    datetime.now().date() + timedelta(2)
+    'Tomorrow':  datetime.now().date() + timedelta(2)
 }
 
 
